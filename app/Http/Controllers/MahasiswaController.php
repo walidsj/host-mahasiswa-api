@@ -147,7 +147,7 @@ class MahasiswaController extends Controller
          ->leftJoin('semesters', 'mahasiswas.idSemester', '=', 'semesters.id')
          ->leftJoin('prodis', 'semesters.idProdi', '=', 'prodis.id')
          ->leftJoin('jurusans', 'prodis.idJurusan', '=', 'jurusans.id')
-         ->select('mahasiswas.*', 'semesters.name as nameSemester', 'jurusans.id as idJurusan', 'jurusans.name as nameJurusan', 'prodis.id as idProdi', 'prodis.name as nameProdi')
+         ->select('mahasiswas.*', 'semesters.number as numberSemester', 'semesters.name as nameSemester', 'jurusans.id as idJurusan', 'jurusans.name as nameJurusan', 'prodis.id as idProdi', 'prodis.name as nameProdi')
          ->first();
 
       if ($mahasiswa->count() > 0) {
