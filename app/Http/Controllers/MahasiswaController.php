@@ -93,7 +93,7 @@ class MahasiswaController extends Controller
          'npm' => 'required|numeric|digits:10',
          'yearGeneration' => 'required|numeric|digits:4',
          'yearGraduation' => 'required|numeric|digits:4',
-         'class' => 'required|numeric'
+         'numberAbsen' => 'required|numeric'
       ]);
 
       $mahasiswa = Mahasiswa::create($request->all());
