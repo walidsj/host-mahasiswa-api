@@ -13,7 +13,7 @@ class Mahasiswa extends Model
     * @var array
     */
    protected $fillable = [
-      'idSemester', 'name', 'npm', 'gender', 'yearGeneration', 'yearGraduation', 'class'
+      'idSemester', 'name', 'npm', 'gender', 'yearGeneration', 'yearGraduation', 'class', 'numberAbsen'
    ];
 
    /**

@@ -24,6 +24,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('yearGeneration');
             $table->string('yearGraduation');
             $table->string('class');
+            $table->string('numberAbsen');
             $table->timestamps();
         });
     }

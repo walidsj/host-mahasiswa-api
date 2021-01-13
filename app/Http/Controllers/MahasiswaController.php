@@ -15,7 +15,8 @@ class MahasiswaController extends Controller
          'id' => 'numeric',
          'idProdi' => 'numeric',
          'idJurusan' => 'numeric',
-         'idSemester' => 'numeric'
+         'idSemester' => 'numeric',
+         'numberAbsen' => 'numeric'
       ]);
 
       $mahasiswa = Mahasiswa::query();
@@ -54,6 +55,9 @@ class MahasiswaController extends Controller
       if ($request->input('class')) {
          $mahasiswa->where('class', 'like', '%' . $request->input('class') . '%');
       }
+      if ($request->input('numberAbsen')) {
+         $mahasiswa->where('numberAbsen', $request->input('numberAbsen'));
+      }
       if ($request->input('nameJurusan')) {
          $mahasiswa->where('jurusans.name', 'like', '%' . $request->input('nameJurusan') . '%');
       }
@@ -88,7 +92,8 @@ class MahasiswaController extends Controller
          'gender' => 'required|in:Male,Female',
          'npm' => 'required|numeric|digits:10',
          'yearGeneration' => 'required|numeric|digits:4',
-         'yearGraduation' => 'required|numeric|digits:4'
+         'yearGraduation' => 'required|numeric|digits:4',
+         'class' => 'required|numeric'
       ]);
 
       $mahasiswa = Mahasiswa::create($request->all());
@@ -108,7 +113,8 @@ class MahasiswaController extends Controller
          'gender' => 'in:Male,Female',
          'npm' => 'numeric|digits:10',
          'yearGeneration' => 'numeric|digits:4',
-         'yearGraduation' => 'numeric|digits:4'
+         'yearGraduation' => 'numeric|digits:4',
+         'numberAbsen' => 'numeric'
       ]);
 
       $mahasiswa = Mahasiswa::findOrFail($request->input('id'));
