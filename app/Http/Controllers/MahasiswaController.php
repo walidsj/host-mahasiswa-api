@@ -163,7 +163,6 @@ class MahasiswaController extends Controller
          return response()->json([
             'status' => 'success',
             'message' => 'Mahasiswa has found.',
-            'row' => $mahasiswa->count(),
             'data' => [
                'mahasiswa' => $mahasiswa,
                'matkuls' => $matkuls
