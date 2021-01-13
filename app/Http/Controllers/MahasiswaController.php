@@ -156,7 +156,8 @@ class MahasiswaController extends Controller
          ->select('mahasiswas.*', 'semesters.number as numberSemester', 'semesters.name as nameSemester', 'jurusans.id as idJurusan', 'jurusans.name as nameJurusan', 'prodis.id as idProdi', 'prodis.code as codeProdi', 'prodis.name as nameProdi')
          ->first();
 
-      if ($mahasiswa->count() > 0) {
+      if ($mahasiswa) {
+         $mahasiswa->increment('hits');
          $matkuls = Matkul::where('idSemester', $mahasiswa->idSemester)->get();
 
          return response()->json([
