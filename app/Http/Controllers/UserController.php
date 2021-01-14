@@ -15,6 +15,7 @@ class UserController extends Controller
       $this->validate($request, [
          'name' => 'required',
          'password' => 'required',
+         'role' => 'required|in:admin,user',
          'email' => 'required|email|unique:users'
       ]);
 
@@ -22,6 +23,7 @@ class UserController extends Controller
          'api_token' => Str::random(60),
          'email' => $request->input('email'),
          'name' => $request->input('name'),
+         'role' => $request->input('role') ? $request->input('role') : 'user',
          'password' => Hash::make($request->input('password'))
       ];
 
@@ -39,6 +41,7 @@ class UserController extends Controller
       $this->validate($request, [
          'name' => 'required',
          'password' => 'required',
+         'role' => 'required|in:admin,user',
          'email' => 'required|email'
       ]);
 

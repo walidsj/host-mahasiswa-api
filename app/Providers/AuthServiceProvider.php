@@ -33,8 +33,6 @@ class AuthServiceProvider extends ServiceProvider
         $this->app['auth']->viaRequest('api', function ($request) {
             $key = $request->header('Authorization');
 
-            // Token harus diexplode terlebih dahulu karena Authorization punya
-            // format "Bearer {TOKEN VALUE}" sedangkan yang diinginkan adalah Token saja
             $explode = explode(' ', $key);
             if ($explode[0] == 'Bearer' && !empty($explode[1])) {
                 return User::where('api_token', $explode[1])->first();

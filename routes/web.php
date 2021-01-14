@@ -35,29 +35,31 @@ $router->group(['prefix' => 'api/dev'], function () use ($router) {
 //.. with middleware
 $router->group(['prefix' => 'api/data', 'middleware' => 'auth'], function () use ($router) {
     $router->get('jurusan', ['uses' => 'JurusanController@show']);
-    $router->post('jurusan', ['uses' => 'JurusanController@create']);
-    $router->put('jurusan', ['uses' => 'JurusanController@update']);
-    $router->delete('jurusan', ['uses' => 'JurusanController@delete']);
-
     $router->get('prodi', ['uses' => 'ProdiController@show']);
-    $router->post('prodi', ['uses' => 'ProdiController@create']);
-    $router->put('prodi', ['uses' => 'ProdiController@update']);
-    $router->delete('prodi', ['uses' => 'ProdiController@delete']);
-
     $router->get('semester', ['uses' => 'SemesterController@show']);
-    $router->post('semester', ['uses' => 'SemesterController@create']);
-    $router->put('semester', ['uses' => 'SemesterController@update']);
-    $router->delete('semester', ['uses' => 'SemesterController@delete']);
-
     $router->get('mahasiswa', ['uses' => 'MahasiswaController@show']);
-    $router->post('mahasiswa', ['uses' => 'MahasiswaController@create']);
-    $router->put('mahasiswa', ['uses' => 'MahasiswaController@update']);
-    $router->delete('mahasiswa', ['uses' => 'MahasiswaController@delete']);
-
     $router->get('matkul', ['uses' => 'MatkulController@show']);
-    $router->post('matkul', ['uses' => 'MatkulController@create']);
-    $router->put('matkul', ['uses' => 'MatkulController@update']);
-    $router->delete('matkul', ['uses' => 'MatkulController@delete']);
-
     $router->get('mahasiswa/search-matkul', ['uses' => 'MahasiswaController@showWithMatkul']);
+
+    $router->group(['middleware' => 'role:admin'], function () use ($router) {
+        $router->post('jurusan', ['uses' => 'JurusanController@create']);
+        $router->put('jurusan', ['uses' => 'JurusanController@update']);
+        $router->delete('jurusan', ['uses' => 'JurusanController@delete']);
+
+        $router->post('prodi', ['uses' => 'ProdiController@create']);
+        $router->put('prodi', ['uses' => 'ProdiController@update']);
+        $router->delete('prodi', ['uses' => 'ProdiController@delete']);
+
+        $router->post('semester', ['uses' => 'SemesterController@create']);
+        $router->put('semester', ['uses' => 'SemesterController@update']);
+        $router->delete('semester', ['uses' => 'SemesterController@delete']);
+
+        $router->post('mahasiswa', ['uses' => 'MahasiswaController@create']);
+        $router->put('mahasiswa', ['uses' => 'MahasiswaController@update']);
+        $router->delete('mahasiswa', ['uses' => 'MahasiswaController@delete']);
+
+        $router->post('matkul', ['uses' => 'MatkulController@create']);
+        $router->put('matkul', ['uses' => 'MatkulController@update']);
+        $router->delete('matkul', ['uses' => 'MatkulController@delete']);
+    });
 });
