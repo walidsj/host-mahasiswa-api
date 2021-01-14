@@ -68,11 +68,12 @@ class MahasiswaController extends Controller
          $mahasiswa->where('semesters.name', 'like', '%' . $request->input('nameSemester') . '%');
       }
 
-      if ($mahasiswa->count() > 0) {
+      $numRows = $mahasiswa->count();
+      if ($numRows > 0) {
          return response()->json([
             'status' => 'success',
             'message' => 'Mahasiswa has found.',
-            'row' => $mahasiswa->count(),
+            'row' => $numRows,
             'data' => $mahasiswa->get()
          ]);
       } else {

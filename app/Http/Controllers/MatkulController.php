@@ -59,11 +59,12 @@ class MatkulController extends Controller
          $matkul->where('semesters.name', 'like', '%' . $request->input('nameSemester') . '%');
       }
 
-      if ($matkul->count() > 0) {
+      $numRows = $matkul->count();
+      if ($numRows > 0) {
          return response()->json([
             'status' => 'success',
             'message' => 'Matkul has found.',
-            'row' => $matkul->count(),
+            'row' => $numRows,
             'data' => $matkul->get()
          ]);
       } else {

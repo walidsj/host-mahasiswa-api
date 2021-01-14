@@ -44,11 +44,12 @@ class SemesterController extends Controller
          $semester->where('prodis.name', 'like', '%' . $request->input('nameProdi') . '%');
       }
 
-      if ($semester->count() > 0) {
+      $numRows = $semester->count();
+      if ($numRows > 0) {
          return response()->json([
             'status' => 'success',
             'message' => 'Semester has found.',
-            'row' => $semester->count(),
+            'row' => $numRows,
             'data' => $semester->get()
          ]);
       } else {

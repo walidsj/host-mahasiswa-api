@@ -27,11 +27,13 @@ class JurusanController extends Controller
          $jurusan->where('contactPerson', 'like', '%' . $request->input('contactPerson') . '%');
       }
 
-      if ($jurusan->count() > 0) {
+      $numRows = $jurusan->count();
+
+      if ($numRows > 0) {
          return response()->json([
             'status' => 'success',
             'message' => 'Jurusan has found.',
-            'row' => $jurusan->count(),
+            'row' => $numRows,
             'data' => $jurusan->get()
          ]);
       } else {
