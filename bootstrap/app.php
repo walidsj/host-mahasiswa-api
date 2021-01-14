@@ -23,11 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-/* start uncomment 2021-01-12 */
 $app->withFacades();
 
 $app->withEloquent();
-/* end uncomment */
 
 /*
 |--------------------------------------------------------------------------
@@ -94,11 +92,9 @@ $app->routeMiddleware([
 |
 */
 
-/* start uncomment 2021-01-12 */
-$app->register(App\Providers\AppServiceProvider::class);
+// $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
-$app->register(App\Providers\EventServiceProvider::class);
-/* end uncomment */
+// $app->register(App\Providers\EventServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
