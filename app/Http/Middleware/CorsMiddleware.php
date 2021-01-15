@@ -21,18 +21,20 @@ class CorsMiddleware
     public function handle($request, Closure $next)
     {
         $authorization = $request->header('Authorization');
-        $key = explode(' ', $authorization);
 
-        if (!empty($authorization) && $key[0] == 'Bearer' && !empty($key[1])) {
-            $user = User::where('api_token', $key[1])->first();
-            $urlClient = explode(',', $user->hostClient);
-            $headers = [
-                'Access-Control-Allow-Origin'      => $urlClient,
-                'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
-                'Access-Control-Allow-Credentials' => 'true',
-                'Access-Control-Max-Age'           => '86400',
-                'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
-            ];
+        if (!empty($authorization)) {
+            $key = explode(' ', $authorization);
+            if ($key[0] == 'Bearer' && !empty($key[1])) {
+                $user = User::where('api_token', $key[1])->first();
+                $urlClient = explode(',', $user->hostClient);
+                $headers = [
+                    'Access-Control-Allow-Origin'      => $urlClient,
+                    'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
+                    'Access-Control-Allow-Credentials' => 'true',
+                    'Access-Control-Max-Age'           => '86400',
+                    'Access-Control-Allow-Headers'     => 'Content-Type, Authorization, X-Requested-With'
+                ];
+            }
         } else {
             $headers = [
                 'Access-Control-Allow-Origin'      => '*',
