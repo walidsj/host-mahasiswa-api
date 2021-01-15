@@ -36,9 +36,9 @@ class AuthServiceProvider extends ServiceProvider
             $key = explode(' ', $authorization);
             if ($key[0] == 'Bearer' && !empty($key[1])) {
                 $user = User::where('api_token', $key[1])->first();
-                $origin = $request->header('Origin');
+                $origin = request()->headers->get('Origin');
                 $hostClient = explode(',', $user->hostClient);
-                if (in_array($hostClient, $origin)) {
+                if (in_array($origin, $hostClient)) {
                     return $user;
                 }
             }
