@@ -26,9 +26,8 @@ class CorsMiddleware
             $key = explode(' ', $authorization);
             if ($key[0] == 'Bearer' && !empty($key[1])) {
                 $user = User::where('api_token', $key[1])->first();
-                $urlClient = explode(',', $user->hostClient);
                 $headers = [
-                    'Access-Control-Allow-Origin'      => $urlClient,
+                    'Access-Control-Allow-Origin'      => $user->hostClient,
                     'Access-Control-Allow-Methods'     => 'POST, GET, OPTIONS, PUT, DELETE',
                     'Access-Control-Allow-Credentials' => 'true',
                     'Access-Control-Max-Age'           => '86400',
