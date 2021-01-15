@@ -35,10 +35,12 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
+        $origin = request()->headers->get('Origin');
+
         if ($this->auth->guard($guard)->guest()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Unauthorized. You need an valid API Token.',
+                'message' => 'Unauthorized. You need an valid API Token. Origin: ' . $origin,
             ], 401);
         }
 
