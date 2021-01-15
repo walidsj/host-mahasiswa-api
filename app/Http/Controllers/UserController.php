@@ -16,6 +16,7 @@ class UserController extends Controller
          'name' => 'required',
          'password' => 'required',
          'role' => 'required|in:admin,user',
+         'hostClient' => 'required',
          'email' => 'required|email|unique:users'
       ]);
 
@@ -24,6 +25,7 @@ class UserController extends Controller
          'email' => $request->input('email'),
          'name' => $request->input('name'),
          'role' => $request->input('role') ? $request->input('role') : 'user',
+         'hostClient' => $request->input('hostClient'),
          'password' => Hash::make($request->input('password'))
       ];
 
