@@ -22,19 +22,15 @@ class CorsMiddleware
     {
         $authorization = $request->header('Authorization');
         $key = explode(' ', $authorization);
-        $origin = $_SERVER['HTTP_ORIGIN'];
 
         if ($key[0] == 'Bearer' && !empty($key[1])) {
             $user = User::where('api_token', $key[1])->first();
             $urlClient = explode(',', $user->hostClient);
-            if (in_array($urlClient, $origin)) {
-                $headers['Access-Control-Allow-Origin'] = $origin;
-            } else {
-                $headers['Access-Control-Allow-Origin'] = '*';
-            }
+            $headers['Access-Control-Allow-Origin'] = $urlClient;
         } else {
-            $header['Access-Control-Allow-Origin'] = '*';
+            $headers['Access-Control-Allow-Origin'] = '*';
         }
+
         $header['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS, PUT, DELETE';
         $header['Access-Control-Allow-Credentials'] = 'true';
         $header['Access-Control-Max-Age'] = '86400';
