@@ -23,7 +23,7 @@ class CorsMiddleware
         $authorization = $request->header('Authorization');
         $key = explode(' ', $authorization);
 
-        if ($key[0] == 'Bearer' && !empty($key[1])) {
+        if (!empty($authorization) && $key[0] == 'Bearer' && !empty($key[1])) {
             $user = User::where('api_token', $key[1])->first();
             $urlClient = explode(',', $user->hostClient);
             $headers = [
