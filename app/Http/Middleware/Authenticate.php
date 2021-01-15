@@ -38,7 +38,7 @@ class Authenticate
         if ($this->auth->guard($guard)->guest()) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Unauthorized. You need an API Token through Authorization header.',
+                'message' => 'Unauthorized. You need an valid API Token.',
             ], 401);
         }
 
