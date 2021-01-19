@@ -32,15 +32,10 @@ class AuthServiceProvider extends ServiceProvider
 
         $this->app['auth']->viaRequest('api', function ($request) {
             $authorization = $request->header('Authorization');
-
+            $origin = $request->header('Origin');
             $key = explode(' ', $authorization);
-            if ($key[0] == 'Bearer' && !empty($key[1])) {
-                $user = User::where('api_token', $key[1])->first();
-                $origin = $request->header('Origin');
-                $hostClient = explode(',', $user->hostClient);
-                if (in_array($origin, $hostClient)) {
-                    return $user;
-                }
+            if ($key[0] == 'Bearer' && !empty($key[1]) && !empty($origin)) {
+                return User::where('api_token', $key[1])->where('hostClient', $origin)->first();
             }
         });
     }
