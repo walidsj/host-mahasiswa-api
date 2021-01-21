@@ -159,7 +159,9 @@ class MahasiswaController extends Controller
 
       if ($mahasiswa) {
          $mahasiswa->increment('hits');
-         $matkuls = Matkul::where('idSemester', $mahasiswa->idSemester)->get();
+         $matkuls = Matkul::where('idSemester', $mahasiswa->idSemester)
+            ->orderBy('sessionExam', 'asc')
+            ->get();
 
          return response()->json([
             'status' => 'success',
