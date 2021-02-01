@@ -19,6 +19,7 @@ class CreateMahasiswasTable extends Migration
             $table->index('idSemester');
             $table->foreign('idSemester')->references('id')->on('semesters')->onDelete('cascade');
             $table->string('name');
+            $table->string('email');
             $table->string('npm');
             $table->string('gender');
             $table->string('yearGeneration');
