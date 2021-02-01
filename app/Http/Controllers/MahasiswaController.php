@@ -40,6 +40,9 @@ class MahasiswaController extends Controller
       if ($request->input('name')) {
          $mahasiswa->where('mahasiswas.name', 'like', '%' . $request->input('name') . '%');
       }
+      if ($request->input('email')) {
+         $mahasiswa->where('mahasiswas.email', 'like', '%' . $request->input('email') . '%');
+      }
       if ($request->input('npm')) {
          $mahasiswa->where('npm', 'like', '%' . $request->input('npm') . '%');
       }
@@ -88,6 +91,7 @@ class MahasiswaController extends Controller
    {
       $this->validate($request, [
          'name' => 'required',
+         'email' => 'required|email',
          'class' => 'required',
          'idSemester' => 'required|numeric',
          'gender' => 'required|in:Male,Female',
@@ -113,6 +117,7 @@ class MahasiswaController extends Controller
          'idSemester' => 'numeric',
          'gender' => 'in:Male,Female',
          'npm' => 'numeric|digits:10',
+         'email' => 'email',
          'yearGeneration' => 'numeric|digits:4',
          'yearGraduation' => 'numeric|digits:4',
          'numberAbsen' => 'numeric'
